@@ -6,7 +6,9 @@ ARG PI_VERSION=v0.80.3
 ARG PI_TAR_HASH=e74a34ac2505556164144d8e39a64d6d5276f092166dad914319edc30c48abee
 
 USER root
-RUN apt install --update --yes --no-install-recommends fd-find \
+RUN apt install --update --yes --no-install-recommends \
+    fd-find \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
 USER agent
@@ -16,4 +18,7 @@ RUN curl -LO https://github.com/earendil-works/pi/releases/download/$PI_VERSION/
     && rm pi-linux-x64.tar.gz \
     && mkdir -p $HOME/.local/bin \
     && mv pi/theme pi/pi $HOME/.local/bin \
-    && rm -rf pi
+    && rm -rf pi \
+    && mkdir -p $HOME/.pi/agent
+
+COPY models.json /home/agent/.pi/agent
