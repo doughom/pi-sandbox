@@ -21,4 +21,4 @@ RUN curl -LO https://github.com/earendil-works/pi/releases/download/$PI_VERSION/
     && rm -rf pi \
     && mkdir -p $HOME/.pi/agent
 
-COPY models.json /home/agent/.pi/agent
+COPY --chown=agent:agent models.json /home/agent/.pi/agent
