@@ -43,6 +43,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           provenance: mode=max
           tags: ghcr.io/${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Attestation
         uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373 # v4.1.1
