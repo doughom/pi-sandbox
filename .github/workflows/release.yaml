@@ -27,6 +27,15 @@ jobs:
       - name: Setup
         uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
 
+      - name: Install Docker Sandbox
+        run: |
+          sudo cp apt/docker.asc /etc/apt/keyrings/
+          sudo cp apt/docker.sources /etc/apt/sources.list.d/
+          sudo apt install --update --yes --no-install-recommends docker-sbx
+
+      - name: Validate sandbox kit
+        run: sbx kit validate .
+
       - name: GHCR login
         uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
         with:
@@ -34,7 +43,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Push sandbox kit
+        run: sbx kit push . ghcr.io/${{ github.repository }}:kit
+
+      - name: Build and push image
         id: build
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
