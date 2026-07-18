@@ -4,7 +4,7 @@
 ## Usage
 ```shell
 # Create new sandbox
-sbx run --template ghcr.io/doughom/pi-sandbox:latest shell
+sbx run pi --kit ghcr.io/doughom/pi-sandbox:kit
 
 # List sandboxes
 sbx ls
