@@ -1,26 +1,20 @@
 # https://hub.docker.com/layers/docker/sandbox-templates/shell
-FROM docker/sandbox-templates@sha256:bd90847e98720dde718fe95b24bd4c7d9d4de41966339eb8bf3ab2bb683259e5
-
-# https://github.com/earendil-works/pi/releases
-ARG PI_VERSION=v0.80.3
-ARG PI_TAR_HASH=e74a34ac2505556164144d8e39a64d6d5276f092166dad914319edc30c48abee
+FROM docker/sandbox-templates:shell@sha256:c66aa9c0212bb710089cc356501f8bde8989e02a7071bf1c6be0893be1c30adf
 
 USER root
 RUN apt install --update --yes --no-install-recommends \
     fd-find \
     nano \
-    && rm -rf /var/lib/apt/lists/*
-
-USER agent
-RUN curl -LO https://github.com/earendil-works/pi/releases/download/$PI_VERSION/pi-linux-x64.tar.gz \
-    && sha256sum pi-linux-x64.tar.gz | grep -q $PI_TAR_HASH \
-    && tar xzf pi-linux-x64.tar.gz \
-    && rm pi-linux-x64.tar.gz \
-    && mkdir -p $HOME/.local/bin \
-    && mv pi/theme pi/pi $HOME/.local/bin \
-    && rm -rf pi \
-    && mkdir -p $HOME/.pi/agent
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /usr/local/share/pi/ /usr/local/lib/node_modules/
 
 COPY --chown=agent:agent models.json settings.json /home/agent/.pi/agent/
+COPY package.json package-lock.json /usr/local/share/pi/
+RUN cd /usr/local/share/pi/ \
+    && npm install \
+    && cp -a node_modules/* /usr/local/lib/node_modules/ \
+    && ln -s /usr/local/lib/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js /usr/local/bin/pi \
+    && ln -s /usr/local/lib/node_modules/@earendil-works/pi-ai/dist/cli.js /usr/local/bin/pi-ai
 
+USER agent
 CMD ["pi"]

@@ -6,7 +6,13 @@
             "apiKey": "lmstudio",
             "models": [
                 {
+                    "id": "google/gemma-4-12b"
+                },
+                {
                     "id": "google/gemma-4-12b-qat"
+                },
+                {
+                    "id": "openai/gpt-oss-20b"
                 }
             ]
         }
