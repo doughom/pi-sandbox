@@ -4,17 +4,7 @@
             "baseUrl": "http://host.docker.internal:1234/v1",
             "api": "openai-completions",
             "apiKey": "lmstudio",
-            "models": [
-                {
-                    "id": "google/gemma-4-12b"
-                },
-                {
-                    "id": "google/gemma-4-12b-qat"
-                },
-                {
-                    "id": "openai/gpt-oss-20b"
-                }
-            ]
+            "models": []
         }
     }
 }
