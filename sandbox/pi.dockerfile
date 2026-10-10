@@ -2,8 +2,7 @@
 FROM docker/sandbox-templates:shell@sha256:c66aa9c0212bb710089cc356501f8bde8989e02a7071bf1c6be0893be1c30adf
 
 USER root
-COPY --chown=agent:agent models.json /home/agent/.pi/agent/
-COPY --chmod=755 entrypoint.sh package.json package-lock.json /
+COPY package.json package-lock.json /
 
 RUN apt install --update --yes --no-install-recommends \
         fd-find \
@@ -20,5 +19,7 @@ RUN apt install --update --yes --no-install-recommends \
     && ln -s /usr/local/lib/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js /usr/local/bin/pi \
     && ln -s /usr/local/lib/node_modules/@earendil-works/pi-ai/dist/cli.js /usr/local/bin/pi-ai
 
+COPY --chown=agent:agent lmstudio-models.ts /home/agent/.pi/agent/extensions/
+
 USER agent
-CMD ["/entrypoint.sh"]
+CMD pi

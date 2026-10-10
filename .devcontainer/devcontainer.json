@@ -1,0 +1,9 @@
+{
+	"image": "ghcr.io/doughom/devcontainer:26.10.9@sha256:46c3c5165742991069354d1fcc07730947a5951e486dd2e3d551790f524272d6",
+	"remoteEnv": {
+		"PATH": "${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
+	},
+	"features": {
+		"ghcr.io/doughom/features/node:1": {}
+	}
+}

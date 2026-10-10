@@ -1,0 +1,17 @@
+{
+  "features": {
+    "ghcr.io/doughom/features/common-utils:2": {
+      "version": "2.0.0",
+      "resolved": "ghcr.io/doughom/features/common-utils@sha256:2eaa7788f5433352c94ab7cc4bc247647ac6bbc234f6b76f6747462ba8938347",
+      "integrity": "sha256:2eaa7788f5433352c94ab7cc4bc247647ac6bbc234f6b76f6747462ba8938347"
+    },
+    "ghcr.io/doughom/features/node:1": {
+      "version": "1.0.0",
+      "resolved": "ghcr.io/doughom/features/node@sha256:a51d007d12f2b29d71615184df09e420e1e23ee0ea4ecc9280263348f76745bd",
+      "integrity": "sha256:a51d007d12f2b29d71615184df09e420e1e23ee0ea4ecc9280263348f76745bd",
+      "dependsOn": [
+        "ghcr.io/doughom/features/common-utils:2"
+      ]
+    }
+  }
+}
