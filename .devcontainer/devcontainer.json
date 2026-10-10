@@ -1,8 +1,12 @@
 {
-	"image": "ghcr.io/doughom/devcontainer:26.10.9@sha256:46c3c5165742991069354d1fcc07730947a5951e486dd2e3d551790f524272d6",
+	"image": "ghcr.io/doughom/devcontainer:26.10.9@sha256:821018479530f63a270a2e0adc04832eeb58e32bfebeba744db6dbda9ec36cc4",
+	"postCreateCommand": "sudo chown -R vscode:vscode /workspaces/; npm install",
 	"remoteEnv": {
 		"PATH": "${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
 	},
+	"mounts": [
+		"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	],
 	"features": {
 		"ghcr.io/doughom/features/node:1": {}
 	}
