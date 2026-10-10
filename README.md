@@ -1,28 +1,22 @@
 # Pi Sandbox
-[Docker Sandbox](https://docs.docker.com/ai/sandboxes) for [Pi](https://pi.dev).
+Run the [Pi coding agent](https://pi.dev) inside a [Docker Sandbox](https://docs.docker.com/ai/sandboxes).
 
 ## Requirements
 - Docker Sandbox v0.45.0 or newer
 
 ## Usage
-See all available verions [here](https://github.com/doughom/pi-sandbox/pkgs/container/pi-sandbox).
-
 ```shell
-# Create new sandbox
-sbx run ghcr.io/doughom/pi-sandbox
 
-# List sandboxes
-sbx ls
-
-# Run existing sandbox
-sbx run --name sandbox-name
+sbx run ghcr.io/doughom/pi-sandbox:latest
 ```
+See all of the available verions [here](https://github.com/doughom/pi-sandbox/pkgs/container/pi-sandbox).
+
 
 ## Development
 ```shell
-# Run local version of sandbox
-sbx run ./sandbox
+# Build and run
+sbx rm -f sandbox-pi-sandbox; sbx run ./sandbox
 
-# Build
+# Build only
 docker buildx build sandbox --file sandbox/pi.yaml
 ```
