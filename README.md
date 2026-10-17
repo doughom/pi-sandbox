@@ -11,6 +11,13 @@ sbx run ghcr.io/doughom/pi-sandbox:latest
 ```
 See all of the available verions [here](https://github.com/doughom/pi-sandbox/pkgs/container/pi-sandbox).
 
+## Sandbox Lifecycle
+Ths scripts in the table run during the [sandbox lifecycle](https://github.com/docker/sandbox-kit-spec/blob/main/docs/spec/capabilities/com.docker.sandbox/lifecycle@1.md) if they exist.
+
+|Path|Purpose|
+|-|-|
+|`.sbx/install.sh`|One time package installation (`npm install`)|
+|`.sbx/startup.sh`|Commands to run before agent starts|
 
 ## Development
 ```shell

@@ -8,8 +8,35 @@ provides: ["pi@1.0.0"]
 
 capabilities:
   - type: com.docker.sandbox/sbx@1
-  - type: com.docker.sandbox/network-policy@1
+
+  - type: com.docker.sandbox/lifecycle@1
     config:
+      install:
+        - env:
+            - UV_PROJECT_ENVIRONMENT
+            - WORKSPACE_DIR
+          command: cd "$WORKSPACE_DIR"; if [ -f .sbx/install.sh ]; then .sbx/install.sh; fi
+          user: agent
+
+      startup:
+        - env:
+            - UV_PROJECT_ENVIRONMENT
+            - WORKSPACE_DIR
+          command: cd "$WORKSPACE_DIR"; if [ -f .sbx/startup.sh ]; then .sbx/startup.sh; fi
+          user: agent
+
+  - type: com.docker.sandbox/network-policy@2
+    config:
+      install:
+        allow:
+          - hosts:
+              - pypi.org
+              - files.pythonhosted.org
+              - registry.npmjs.org
+            methods:
+              - GET
+              - HEAD
+
       runtime:
         allow:
-          - "localhost:1234"
+          - localhost:1234
