@@ -1,8 +1,8 @@
-# https://hub.docker.com/r/astral/uv
-FROM astral/uv:0.13.1@sha256:4a1f3666816dafadd20ceb71eac9a7d56d7ef30279f7d64048519ab901ada336 AS uv
+# https://hub.docker.com/layers/astral/uv/latest
+FROM astral/uv:latest@sha256:32a7bb39b496babbd997b0a39a4d66c126bdaf5661b302bf6f06abda8deca6ff AS uv
 
 # https://hub.docker.com/layers/docker/sandbox-templates/shell
-FROM docker/sandbox-templates:shell@sha256:c66aa9c0212bb710089cc356501f8bde8989e02a7071bf1c6be0893be1c30adf
+FROM docker/sandbox-templates:shell@sha256:7a248c96459694d181d9d51ffc9e530c0b9a4cb3d1887cc070425336b1fb5115
 COPY --from=uv /uv /uvx /usr/local/bin/
 COPY cmd.sh package.json package-lock.json /
 
