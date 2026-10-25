@@ -15,7 +15,7 @@ RUN apt install --update --yes --no-install-recommends \
     && tempDir=$(mktemp -d) \
     && cd $tempDir \
     && mv /package.json /package-lock.json . \
-    && npm install \
+    && node /usr/bin/npm install \
     && cp -a node_modules/* /usr/local/lib/node_modules/ \
     && cd - \
     && rm -rf $tempDir \
